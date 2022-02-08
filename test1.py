@@ -1,7 +1,7 @@
 import sys
 import requests
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QComboBox
 from PyQt5.QtCore import Qt
 
 
@@ -21,8 +21,13 @@ class MainWindow(QMainWindow):
     def initUI(self):
         self.setGeometry(200, 200, 800, 700)
         self.setWindowTitle("T IT")
+        self.typeMap = 'map'
 
         self.image = QLabel(self)
+        self.combobox = QComboBox(self)
+        self.combobox.move(625, 510)
+        self.combobox.addItems(['map', 'sat', 'skl'])
+        self.combobox.activated[str].connect(self.changeMapType)
         self.image.resize(650, 450)
         self.image.move(75, 50)
 
@@ -31,7 +36,7 @@ class MainWindow(QMainWindow):
         lat = str(self.lat)
         params = {
             "ll": ",".join([lon, lat]),
-            "l": "map",
+            "l": self.typeMap,
             "z": self.z,
             "size": ",".join(["650", "450"])
         }
@@ -67,6 +72,9 @@ class MainWindow(QMainWindow):
                 self.lon -= 0.002 * value
         self.update()
 
+    def changeMapType(self, type):
+        self.typeMap = type
+        self.update()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
