@@ -11,7 +11,7 @@ class MainWindow(QMainWindow):
         self.lon = 37.622513
         self.lat = 55.75322
 
-        self.z = 0
+        self.z = 17
 
         self.qp = QPixmap()
 
