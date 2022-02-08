@@ -27,6 +27,7 @@ class MainWindow(QMainWindow):
         self.combobox = QComboBox(self)
         self.combobox.move(625, 510)
         self.combobox.addItems(['map', 'sat', 'skl'])
+        self.combobox.setFocusPolicy(Qt.NoFocus)
         self.combobox.activated[str].connect(self.changeMapType)
         self.image.resize(650, 450)
         self.image.move(75, 50)
